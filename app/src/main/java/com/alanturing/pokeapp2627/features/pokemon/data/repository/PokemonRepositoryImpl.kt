@@ -8,7 +8,7 @@ class PokemonRepositoryImpl @Inject constructor(
     private val _remoteDataSource: PokemonDataSource
 ): PokemonRepository {
     override suspend fun readAllPokemon(): List<Pokemon> {
-        TODO("Not yet implemented")
+        return _remoteDataSource.readAllPokemon()
     }
 
     override suspend fun readPokemonById(): Pokemon {

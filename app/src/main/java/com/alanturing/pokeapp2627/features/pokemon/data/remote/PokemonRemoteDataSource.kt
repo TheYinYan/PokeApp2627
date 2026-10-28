@@ -11,11 +11,14 @@ class PokemonRemoteDataSource
         val response = _api.readAllPokemon()
         val pokemons = mutableListOf<Pokemon>()
         if (response.isSuccessful) {
-            // TODO PARSEAR EL CUERPO A EL MODEL Pokemon
             val body = response.body()!!
-            for(item in body.results) {
-                val pokemon = readPokemonByName(item.name)
-                pokemons.add(pokemon!!)
+            return body.results.map { item ->
+                val id = item.url.trimEnd('/').substringAfterLast('/').toInt()
+                Pokemon(
+                    id = id,
+                    name = item.name,
+                    pokemonImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"
+                )
             }
         }
         else {
