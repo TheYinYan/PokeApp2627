@@ -18,7 +18,7 @@ class PokemonListViewModel @Inject constructor(
     private val repository: PokemonDataSource
 ): ViewModel(){
     private val _state: MutableStateFlow<PokeListUiState> =
-        MutableStateFlow(value = PokeListUiState.Initial)
+        MutableStateFlow(value = PokeListUiState.Loading)
 
     val state: StateFlow<PokeListUiState>
         get() = _state.asStateFlow()
@@ -29,14 +29,12 @@ class PokemonListViewModel @Inject constructor(
 
     fun loadPokemons() {
         viewModelScope.launch {
-            _state.value = PokeListUiState.Loading
             _state.value = PokeListUiState.Success(repository.readAllPokemon())
         }
     }
 }
 
 sealed interface PokeListUiState {
-    object Initial : PokeListUiState
     object Loading: PokeListUiState
     data class Success(val pokemonList: List<Pokemon>) : PokeListUiState
     data class Error(val message: String) : PokeListUiState

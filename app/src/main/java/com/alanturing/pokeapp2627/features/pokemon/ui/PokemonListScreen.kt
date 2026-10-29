@@ -21,9 +21,6 @@ fun PokemonListScreen(
     Column() {
         Text("PokeList")
         when (state) {
-            PokeListUiState.Initial -> {
-                Text("Initial")
-            }
             PokeListUiState.Loading -> {
                 Text("Loading")
             }
