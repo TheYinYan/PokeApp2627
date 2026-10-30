@@ -44,7 +44,7 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
-    implementation("io.coil-kt.coil3:coil-compose:3.0.0")
+
     // Navigation
     implementation("androidx.hilt:hilt-lifecycle-viewmodel-compose:1.4.0")
     implementation(libs.androidx.navigation.compose)
@@ -68,4 +68,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation("io.coil-kt.coil3:coil-compose:3.6.3")
+    implementation("io.coil-kt.coil3:coil-network-okhttp:3.6.3")
 }
