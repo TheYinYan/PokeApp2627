@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokemonListViewModel @Inject constructor(
-    private val repository: PokemonDataSource
+    private val _repository: PokemonRepository
 ): ViewModel(){
     private val _state: MutableStateFlow<PokeListUiState> =
         MutableStateFlow(value = PokeListUiState.Loading)
@@ -29,13 +29,13 @@ class PokemonListViewModel @Inject constructor(
 
     fun loadPokemons() {
         viewModelScope.launch {
-            _state.value = PokeListUiState.Success(repository.readAllPokemon())
+            _state.value = PokeListUiState.Success(_repository.readAllPokemon())
         }
     }
 }
 
-sealed interface PokeListUiState {
-    object Loading: PokeListUiState
-    data class Success(val pokemonList: List<Pokemon>) : PokeListUiState
-    data class Error(val message: String) : PokeListUiState
+sealed class PokeListUiState {
+    object Loading: PokeListUiState()
+    data class Success(val pokemonList: List<Pokemon>) : PokeListUiState()
+    data class Error(val message: String) : PokeListUiState()
 }

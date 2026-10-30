@@ -10,6 +10,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 
 @Composable
@@ -17,7 +18,7 @@ fun PokemonListScreen(
     viewModel: PokemonListViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
 ) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
     Column() {
         Text("PokeList")
         when (state) {
