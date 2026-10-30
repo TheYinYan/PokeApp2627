@@ -6,5 +6,5 @@ sealed class Routes(val route: String){
     @Serializable
     object PokemonList: Routes("PokemonListScreen")
     @Serializable
-    object PokemonDetail: Routes("PokemonDetailScreen")
+    class PokemonDetail(val id: Int): Routes("PokemonDetailScreen/${id}")
 }

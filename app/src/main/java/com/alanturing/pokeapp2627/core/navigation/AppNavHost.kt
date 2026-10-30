@@ -17,9 +17,14 @@ fun AppNavHost(modifier: Modifier = Modifier) {
         modifier = modifier
     ) {
         composable(Routes.PokemonList.route) {
-            PokemonListScreen()
+            PokemonListScreen(
+                toDetail = {
+                    id ->
+                    navController.navigate(Routes.PokemonDetail(id))
+                }
+            )
         }
-        composable(Routes.PokemonDetail.route) {
+        composable<Routes.PokemonDetail> {
             PokemonDetailScreen()
         }
     }
