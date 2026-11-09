@@ -25,7 +25,9 @@ fun AppNavHost(modifier: Modifier = Modifier) {
             )
         }
         composable<Routes.PokemonDetail> {
-            PokemonDetailScreen()
+            PokemonDetailScreen(
+                id = it.arguments?.getInt("id")
+            )
         }
     }
 }

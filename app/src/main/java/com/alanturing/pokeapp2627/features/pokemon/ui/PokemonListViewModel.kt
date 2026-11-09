@@ -29,7 +29,8 @@ class PokemonListViewModel @Inject constructor(
 
     fun loadPokemons() {
         viewModelScope.launch {
-            _state.value = PokeListUiState.Success(_repository.readAllPokemon())
+            val pokemon = _repository.readAllPokemon();
+            _state.value = PokeListUiState.Success(pokemon)
         }
     }
 }

@@ -1,12 +1,19 @@
 package com.alanturing.pokeapp2627.features.pokemon.data.remote
 
 import com.alanturing.pokeapp2627.features.pokemon.data.model.Pokemon
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PokemonRemoteDataSource
     @Inject constructor(
-        private val _api:PokeApi
+        private val _api:PokeApi,
     ): PokemonDataSource {
+
+    override val pokemonList: Flow<List<Pokemon>> = flow {
+        val pokemon = readAllPokemon()
+        emit(pokemon)
+    }
     override suspend fun readAllPokemon(): List<Pokemon> {
         val response = _api.readAllPokemon()
         val pokemons = mutableListOf<Pokemon>()
@@ -38,8 +45,15 @@ class PokemonRemoteDataSource
         }
     }
 
-    override suspend fun readPokemonById(id: Int): Pokemon {
-        TODO("Not yet implemented")
+    override suspend fun readPokemonById(id: Int): Pokemon? {
+        val response = _api.readPokemonById(id)
+        if (response.isSuccessful) {
+            val body = response.body()!!
+            return body.toModel()
+        }
+        else{
+            return null
+        }
     }
 
 }
