@@ -20,7 +20,6 @@ import com.alanturing.pokeapp2627.features.pokemon.data.model.Pokemon
 
 @Composable
 fun PokemonDetailScreen(
-    id: Int?,
     viewModel: PokemonDetailViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
 ) {

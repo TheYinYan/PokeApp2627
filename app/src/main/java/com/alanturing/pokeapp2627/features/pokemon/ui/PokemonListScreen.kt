@@ -21,7 +21,7 @@ import coil3.compose.AsyncImage
 fun PokemonListScreen(
     viewModel: PokemonListViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
-    toDetail: (Int) -> Unit,
+    toDetail: (id: Int) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
